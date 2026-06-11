@@ -56,23 +56,16 @@ public class TwoSum {
 
 class TwoSumSolution {
     public int[] twoSum(int[] nums, int target) {
-       //Optimised Approach
-       Map<Integer,Integer> hm=new HashMap<>();
-       int arr[]=new int[2];
-       for(int i=0;i<nums.length;i++)
-       {
-         int p=target-nums[i];
-         if(hm.containsKey(p))
-         {
-            arr[0]=hm.get(p);
-            arr[1]=i;
-            break;
-         } 
-         else
-         {
-            hm.put(nums[i],i);
-         }
-       }
-       return arr;
+        Map<Integer, Integer> vsitedNumsMap = new HashMap<>();
+        for(int i=0; i< nums.length; i++){
+            int complement = target - nums[i];
+            //if the target is fund in visited number map
+            if(vsitedNumsMap.containsKey(complement)){
+                return new int[] {vsitedNumsMap.get(complement), i};
+            }
+            //return an empty integer array; as there is no match
+            vsitedNumsMap.put(nums[i],i);
+        }
+        return new int[0];
     }
 }
